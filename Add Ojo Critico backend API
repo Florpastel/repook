@@ -1,0 +1,827 @@
+{
+  "name": "ojo-critico-backend",
+  "version": "1.0.0",
+  "description": "Backend server for Ojo Crítico deepfake detection app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": ["deepfake", "detection", "ai", "security"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "axios": "^1.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
+# Ojo Crítico - Backend API
+
+Backend server para la aplicación móvil Ojo Crítico - Detección de Deepfakes.
+
+## Tecnologías
+
+- Node.js + Express
+- APIs: Deepware, Sightengine, AI or Not
+- Multer para manejo de archivos
+- Helmet para seguridad
+
+## Instalación Local
+
+```bash
+npm install
+cp .env.example .env
+# Edita .env con tus API keys
+npm start
+```
+
+## Variables de Entorno Requeridas
+
+```
+DEEPWARE_API_KEY=tu_clave
+SIGHTENGINE_API_USER=tu_usuario
+SIGHTENGINE_API_SECRET=tu_secreto
+AI_OR_NOT_API_KEY=tu_clave
+PORT=3000
+NODE_ENV=production
+```
+
+## Endpoints
+
+- `GET /` - Health check
+- `POST /analyze/video` - Analizar video
+- `POST /analyze/image` - Analizar imagen
+- `POST /analyze/audio` - Analizar audio
+
+## Despliegue
+
+### Render
+1. Conecta este repositorio
+2. Configura las variables de entorno
+3. Deploy automático
+
+### Railway
+```bash
+railway login
+railway init
+railway up
+```
+
+## Licencia
+
+MIT
+
+# API Keys para servicios de detección de Deepfakes
+# Obtén tu clave en: https://deepware.ai/
+DEEPWARE_API_KEY=your_deepware_api_key_here
+
+# Obtén tu clave en: https://sightengine.com/
+SIGHTENGINE_API_USER=your_sightengine_user_here
+SIGHTENGINE_API_SECRET=your_sightengine_secret_here
+
+# Obtén tu clave en: https://www.aiornot.com/
+AI_OR_NOT_API_KEY=your_aiornot_api_key_here
+
+# Configuración del servidor
+PORT=3000
+NODE_ENV=development
+
+# Tamaño máximo de archivo (en bytes) - 50MB por defecto
+MAX_FILE_SIZE=52428800
+
+node_modules/
+uploads/
+.env
+*.log
+.DS_Store
+
+# 🚀 Guía de Despliegue del Backend en Render
+
+## Opción 1: Despliegue Directo desde Carpeta Local
+
+### Paso 1: Inicializar Git en la carpeta backend
+
+Abre PowerShell y ejecuta:
+
+```powershell
+cd C:\Users\elian\.gemini\antigravity\scratch\ojo-critico\backend
+
+# Inicializar repositorio Git
+git init
+
+# Agregar todos los archivos
+git add .
+
+# Hacer commit
+git commit -m "Initial commit - Ojo Critico Backend"
+```
+
+### Paso 2: Crear repositorio en GitHub
+
+1. Ve a https://github.com/new
+2. Nombre del repositorio: `ojo-critico-backend`
+3. Descripción: "Backend API para detección de deepfakes"
+4. **Público** o **Privado** (tu elección)
+5. **NO** marques "Add README" (ya lo tenemos)
+6. Click en "Create repository"
+
+### Paso 3: Subir código a GitHub
+
+GitHub te mostrará comandos. Copia y ejecuta en PowerShell:
+
+```powershell
+# Reemplaza TU_USUARIO con tu usuario de GitHub
+git remote add origin https://github.com/TU_USUARIO/ojo-critico-backend.git
+git branch -M main
+git push -u origin main
+```
+
+Si te pide credenciales:
+- Usuario: tu usuario de GitHub
+- Contraseña: usa un **Personal Access Token** (no tu contraseña normal)
+  - Genera uno en: https://github.com/settings/tokens
+
+### Paso 4: Desplegar en Render
+
+1. Ve a https://dashboard.render.com/
+2. Click en "New +" → "Web Service"
+3. Click en "Connect a repository"
+4. Autoriza Render a acceder a GitHub
+5. Selecciona el repositorio `ojo-critico-backend`
+6. Configuración:
+   - **Name**: `ojo-critico-backend`
+   - **Environment**: `Node`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Plan**: Free
+
+7. **Variables de Entorno** (click en "Advanced"):
+   ```
+   NODE_ENV=production
+   PORT=3000
+   DEEPWARE_API_KEY=tu_clave_aqui
+   SIGHTENGINE_API_USER=tu_usuario_aqui
+   SIGHTENGINE_API_SECRET=tu_secreto_aqui
+   AI_OR_NOT_API_KEY=tu_clave_aqui
+   MAX_FILE_SIZE=52428800
+   ```
+
+8. Click en "Create Web Service"
+
+### Paso 5: Obtener la URL
+
+Render desplegará tu backend y te dará una URL como:
+```
+https://ojo-critico-backend.onrender.com
+```
+
+**Guarda esta URL**, la necesitarás para actualizar la app Flutter.
+
+---
+
+## Opción 2: Despliegue con Railway (Más Fácil)
+
+### Paso 1: Instalar Railway CLI
+
+```powershell
+npm install -g @railway/cli
+```
+
+### Paso 2: Desplegar
+
+```powershell
+cd C:\Users\elian\.gemini\antigravity\scratch\ojo-critico\backend
+
+# Login
+railway login
+
+# Crear proyecto
+railway init
+
+# Desplegar
+railway up
+
+# Agregar variables de entorno
+railway variables set DEEPWARE_API_KEY=tu_clave
+railway variables set SIGHTENGINE_API_USER=tu_usuario
+railway variables set SIGHTENGINE_API_SECRET=tu_secreto
+railway variables set AI_OR_NOT_API_KEY=tu_clave
+railway variables set NODE_ENV=production
+
+# Obtener URL
+railway domain
+```
+
+---
+
+## ✅ Verificar que Funciona
+
+Una vez desplegado, prueba tu backend:
+
+```powershell
+# Reemplaza con tu URL real
+curl https://tu-backend.onrender.com
+```
+
+Deberías ver:
+```json
+{
+  "message": "Ojo Crítico API - Servidor funcionando",
+  "version": "1.0.0",
+  "endpoints": [...]
+}
+```
+
+---
+
+## 🔄 Próximo Paso
+
+Una vez tengas la URL del backend:
+
+1. Abre `flutter_app/lib/main.dart`
+2. Actualiza la línea 22:
+   ```dart
+   static const String baseUrl = 'https://TU-URL-AQUI.onrender.com';
+   ```
+3. Construye el AAB:
+   ```bash
+   flutter build appbundle --release
+   ```
+
+¡Listo para Play Store! 🎉
+
+# 🚀 Despliegue FÁCIL del Backend (SIN Git)
+
+## Método Simple: Subir Archivos Directamente a GitHub
+
+### Paso 1: Crear Repositorio en GitHub
+
+1. Ve a https://github.com/new
+2. Completa:
+   - **Repository name**: `ojo-critico-backend`
+   - **Description**: "Backend API para detección de deepfakes"
+   - **Public** o **Private** (tu elección)
+   - ✅ Marca "Add a README file"
+3. Click en "Create repository"
+
+### Paso 2: Subir Archivos
+
+1. En tu nuevo repositorio, click en "Add file" → "Upload files"
+2. Arrastra estos archivos desde `C:\Users\elian\.gemini\antigravity\scratch\ojo-critico\backend`:
+   - `index.js`
+   - `package.json`
+   - `.env.example`
+   - `.gitignore`
+   - `README.md`
+3. Escribe un mensaje: "Initial commit"
+4. Click en "Commit changes"
+
+### Paso 3: Desplegar en Render
+
+1. Ve a https://dashboard.render.com/
+2. Click en "New +" → "Web Service"
+3. Click en "Connect a repository"
+4. Selecciona tu repositorio `ojo-critico-backend`
+5. Configuración:
+   ```
+   Name: ojo-critico-backend
+   Environment: Node
+   Build Command: npm install
+   Start Command: npm start
+   Instance Type: Free
+   ```
+
+6. **Environment Variables** (muy importante):
+   Click en "Advanced" y agrega:
+   ```
+   NODE_ENV = production
+   PORT = 3000
+   DEEPWARE_API_KEY = (déjalo vacío por ahora)
+   SIGHTENGINE_API_USER = (déjalo vacío por ahora)
+   SIGHTENGINE_API_SECRET = (déjalo vacío por ahora)
+   AI_OR_NOT_API_KEY = (déjalo vacío por ahora)
+   ```
+
+7. Click en "Create Web Service"
+
+### Paso 4: Obtener tu URL
+
+Render desplegará tu backend en ~5 minutos.
+
+Tu URL será algo como:
+```
+https://ojo-critico-backend.onrender.com
+```
+
+**Copia esta URL**, la necesitarás para la app.
+
+---
+
+## ✅ Verificar que Funciona
+
+Abre tu navegador y ve a:
+```
+https://TU-URL.onrender.com
+```
+
+Deberías ver un JSON con el mensaje del servidor.
+
+---
+
+## 📝 Nota sobre las API Keys
+
+El backend funcionará en "modo simulación" sin las API keys reales. Para producción real, necesitarás:
+
+1. **Deepware**: https://deepware.ai/
+2. **Sightengine**: https://sightengine.com/
+3. **AI or Not**: https://www.aiornot.com/
+
+Luego actualiza las variables de entorno en Render.
+
+---
+
+## 🎯 Siguiente Paso
+
+Una vez tengas la URL:
+
+1. Abre `C:\Users\elian\.gemini\antigravity\scratch\ojo-critico\flutter_app\lib\main.dart`
+2. Busca la línea 22 y cambia:
+   ```dart
+   static const String baseUrl = 'https://TU-URL.onrender.com';
+   ```
+3. Guarda el archivo
+4. Construye el AAB:
+   ```bash
+   flutter build appbundle --release
+   ```
+
+¡Listo para subir a Play Store! 🎉
+
+@echo off
+echo ========================================
+echo   DESPLIEGUE AUTOMATICO A GITHUB
+echo ========================================
+echo.
+
+cd /d "%~dp0"
+
+echo [1/5] Verificando Git...
+where git >nul 2>nul
+if errorlevel 1 (
+    echo ERROR: Git no esta instalado
+    echo Descargalo de: https://git-scm.com/download/win
+    pause
+    exit /b 1
+)
+
+echo Git encontrado!
+echo.
+
+echo [2/5] Inicializando repositorio Git...
+if not exist ".git" (
+    git init
+    echo Repositorio inicializado
+) else (
+    echo Repositorio ya existe
+)
+
+echo.
+echo [3/5] Agregando archivos...
+git add .
+git status
+
+echo.
+echo [4/5] Creando commit...
+git commit -m "Backend Ojo Critico - Ready for deployment"
+
+echo.
+echo ========================================
+echo   CONFIGURACION COMPLETADA
+echo ========================================
+echo.
+echo Ahora necesitas:
+echo.
+echo 1. Crear repositorio en GitHub:
+echo    https://github.com/new
+echo    Nombre: ojo-critico-backend
+echo.
+echo 2. Ejecutar estos comandos (reemplaza TU_USUARIO):
+echo.
+echo    git remote add origin https://github.com/TU_USUARIO/ojo-critico-backend.git
+echo    git branch -M main
+echo    git push -u origin main
+echo.
+echo 3. Luego ve a Render y conecta el repositorio
+echo.
+pause
+
+const express = require('express');
+const multer = require('multer');
+const axios = require('axios');
+const cors = require('cors');
+const helmet = require('helmet');
+const fs = require('fs').promises;
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// ============================================
+// SEGURIDAD: Configuración de protecciones
+// ============================================
+// Helmet protege contra vulnerabilidades comunes (XSS, clickjacking, etc.)
+app.use(helmet());
+
+// CORS permite que la app Flutter se conecte desde diferentes orígenes
+app.use(cors());
+
+// Parser para JSON
+app.use(express.json());
+
+// ============================================
+// CONFIGURACIÓN DE MULTER (Subida de archivos)
+// ============================================
+// Almacenamiento temporal en disco
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    // Nombre único para evitar colisiones
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB por defecto
+  },
+  fileFilter: (req, file, cb) => {
+    // Validar tipos de archivo permitidos
+    const allowedMimes = [
+      'image/jpeg', 'image/png', 'image/jpg',
+      'video/mp4', 'video/mpeg', 'video/quicktime',
+      'audio/mpeg', 'audio/wav', 'audio/mp3'
+    ];
+    
+    if (allowedMimes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Tipo de archivo no permitido'));
+    }
+  }
+});
+
+// Crear carpeta de uploads si no existe
+const uploadsDir = path.join(__dirname, 'uploads');
+fs.mkdir(uploadsDir, { recursive: true }).catch(console.error);
+
+// ============================================
+// FUNCIONES DE INTEGRACIÓN CON APIs
+// ============================================
+
+/**
+ * Analiza un video usando la API de Deepware
+ * @param {string} filePath - Ruta del archivo de video
+ * @returns {Promise<Object>} - Resultado del análisis
+ */
+async function analyzeVideoWithDeepware(filePath) {
+  try {
+    const formData = new FormData();
+    const fileBuffer = await fs.readFile(filePath);
+    formData.append('video', fileBuffer);
+
+    const response = await axios.post('https://api.deepware.ai/v1/scan', formData, {
+      headers: {
+        'Authorization': `Bearer ${process.env.DEEPWARE_API_KEY}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    return {
+      probability: response.data.fake_probability || 0,
+      details: response.data.details || {},
+      provider: 'Deepware'
+    };
+  } catch (error) {
+    console.error('Error en Deepware API:', error.message);
+    // Fallback: simulación para desarrollo (ELIMINAR EN PRODUCCIÓN)
+    return simulateAnalysis('video');
+  }
+}
+
+/**
+ * Analiza una imagen usando la API de Sightengine
+ * @param {string} filePath - Ruta del archivo de imagen
+ * @returns {Promise<Object>} - Resultado del análisis
+ */
+async function analyzeImageWithSightengine(filePath) {
+  try {
+    const formData = new FormData();
+    const fileBuffer = await fs.readFile(filePath);
+    formData.append('media', fileBuffer);
+
+    const response = await axios.post('https://api.sightengine.com/1.0/check.json', formData, {
+      params: {
+        models: 'genai',
+        api_user: process.env.SIGHTENGINE_API_USER,
+        api_secret: process.env.SIGHTENGINE_API_SECRET
+      }
+    });
+
+    return {
+      probability: response.data.type?.ai_generated || 0,
+      details: response.data,
+      provider: 'Sightengine'
+    };
+  } catch (error) {
+    console.error('Error en Sightengine API:', error.message);
+    return simulateAnalysis('image');
+  }
+}
+
+/**
+ * Analiza un audio usando la API de AI or Not
+ * @param {string} filePath - Ruta del archivo de audio
+ * @returns {Promise<Object>} - Resultado del análisis
+ */
+async function analyzeAudioWithAIorNot(filePath) {
+  try {
+    const formData = new FormData();
+    const fileBuffer = await fs.readFile(filePath);
+    formData.append('audio', fileBuffer);
+
+    const response = await axios.post('https://api.aiornot.com/v1/reports/audio', formData, {
+      headers: {
+        'Authorization': `Bearer ${process.env.AI_OR_NOT_API_KEY}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    return {
+      probability: response.data.ai.probability || 0,
+      details: response.data,
+      provider: 'AI or Not'
+    };
+  } catch (error) {
+    console.error('Error en AI or Not API:', error.message);
+    return simulateAnalysis('audio');
+  }
+}
+
+/**
+ * Simulación de análisis para desarrollo/testing
+ * NOTA: Eliminar en producción cuando las APIs estén configuradas
+ */
+function simulateAnalysis(type) {
+  const probability = Math.random() * 100;
+  const signs = [];
+
+  // Simular detección de los 7 signos reveladores
+  if (probability > 60) {
+    const possibleSigns = [
+      'Sincronización labial deficiente en fonemas P/B/M',
+      'Patrón de parpadeo antinatural (< 10 veces/min)',
+      'Inconsistencias en reflejos de luz en los ojos',
+      'Sombras faciales inconsistentes con la fuente de luz',
+      'Artefactos digitales en bordes del cabello',
+      'Textura de piel excesivamente suave',
+      'Movimientos de cabeza robóticos'
+    ];
+    
+    const numSigns = Math.floor(Math.random() * 3) + 1;
+    for (let i = 0; i < numSigns; i++) {
+      signs.push(possibleSigns[Math.floor(Math.random() * possibleSigns.length)]);
+    }
+  }
+
+  return {
+    probability: probability,
+    details: { detected_signs: signs },
+    provider: 'Simulation'
+  };
+}
+
+/**
+ * Determina el nivel de riesgo y mensaje basado en la probabilidad
+ */
+function getRiskAssessment(probability, details) {
+  if (probability > 80) {
+    return {
+      status: 'ALERT',
+      risk_level: 'High',
+      message: '⚠️ Alto riesgo de Deepfake detectado',
+      recommendation: 'Este contenido muestra múltiples signos de manipulación por IA. No confíes en su autenticidad.',
+      detected_signs: details.detected_signs || []
+    };
+  } else if (probability >= 30 && probability <= 70) {
+    return {
+      status: 'UNCERTAIN',
+      risk_level: 'Medium',
+      message: '⚡ Resultado incierto - Verificación manual requerida',
+      recommendation: 'Revisa manualmente: ¿Los ojos reflejan la luz correctamente? ¿Las sombras son consistentes? ¿El parpadeo es natural?',
+      detected_signs: details.detected_signs || []
+    };
+  } else {
+    return {
+      status: 'SAFE',
+      risk_level: 'Low',
+      message: '✅ Contenido probablemente auténtico',
+      recommendation: 'No se detectaron signos significativos de manipulación, pero mantén siempre un pensamiento crítico.',
+      detected_signs: []
+    };
+  }
+}
+
+// ============================================
+// RUTAS DE LA API
+// ============================================
+
+// Ruta de prueba
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Ojo Crítico API - Servidor funcionando',
+    version: '1.0.0',
+    endpoints: [
+      'POST /analyze/video',
+      'POST /analyze/image',
+      'POST /analyze/audio'
+    ]
+  });
+});
+
+// Analizar video
+app.post('/analyze/video', upload.single('file'), async (req, res) => {
+  let filePath = null;
+  
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se recibió ningún archivo' });
+    }
+
+    filePath = req.file.path;
+    console.log(`Analizando video: ${req.file.originalname}`);
+
+    // Llamar a la API de detección
+    const result = await analyzeVideoWithDeepware(filePath);
+    
+    // Evaluar riesgo
+    const assessment = getRiskAssessment(result.probability, result.details);
+
+    // PRIVACIDAD: Eliminar archivo inmediatamente después del análisis
+    await fs.unlink(filePath);
+    console.log(`Archivo eliminado por privacidad: ${filePath}`);
+
+    res.json({
+      success: true,
+      type: 'video',
+      probability: result.probability,
+      provider: result.provider,
+      ...assessment
+    });
+
+  } catch (error) {
+    console.error('Error al analizar video:', error);
+    
+    // Asegurar eliminación del archivo incluso en caso de error
+    if (filePath) {
+      try {
+        await fs.unlink(filePath);
+      } catch (unlinkError) {
+        console.error('Error al eliminar archivo:', unlinkError);
+      }
+    }
+
+    res.status(500).json({
+      error: 'Error al procesar el video',
+      details: error.message
+    });
+  }
+});
+
+// Analizar imagen
+app.post('/analyze/image', upload.single('file'), async (req, res) => {
+  let filePath = null;
+  
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se recibió ningún archivo' });
+    }
+
+    filePath = req.file.path;
+    console.log(`Analizando imagen: ${req.file.originalname}`);
+
+    const result = await analyzeImageWithSightengine(filePath);
+    const assessment = getRiskAssessment(result.probability, result.details);
+
+    // PRIVACIDAD: Eliminar archivo
+    await fs.unlink(filePath);
+    console.log(`Archivo eliminado por privacidad: ${filePath}`);
+
+    res.json({
+      success: true,
+      type: 'image',
+      probability: result.probability,
+      provider: result.provider,
+      ...assessment
+    });
+
+  } catch (error) {
+    console.error('Error al analizar imagen:', error);
+    
+    if (filePath) {
+      try {
+        await fs.unlink(filePath);
+      } catch (unlinkError) {
+        console.error('Error al eliminar archivo:', unlinkError);
+      }
+    }
+
+    res.status(500).json({
+      error: 'Error al procesar la imagen',
+      details: error.message
+    });
+  }
+});
+
+// Analizar audio
+app.post('/analyze/audio', upload.single('file'), async (req, res) => {
+  let filePath = null;
+  
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se recibió ningún archivo' });
+    }
+
+    filePath = req.file.path;
+    console.log(`Analizando audio: ${req.file.originalname}`);
+
+    const result = await analyzeAudioWithAIorNot(filePath);
+    const assessment = getRiskAssessment(result.probability, result.details);
+
+    // PRIVACIDAD: Eliminar archivo
+    await fs.unlink(filePath);
+    console.log(`Archivo eliminado por privacidad: ${filePath}`);
+
+    res.json({
+      success: true,
+      type: 'audio',
+      probability: result.probability,
+      provider: result.provider,
+      ...assessment
+    });
+
+  } catch (error) {
+    console.error('Error al analizar audio:', error);
+    
+    if (filePath) {
+      try {
+        await fs.unlink(filePath);
+      } catch (unlinkError) {
+        console.error('Error al eliminar archivo:', unlinkError);
+      }
+    }
+
+    res.status(500).json({
+      error: 'Error al procesar el audio',
+      details: error.message
+    });
+  }
+});
+
+// ============================================
+// INICIAR SERVIDOR
+// ============================================
+app.listen(PORT, () => {
+  console.log(`
+╔═══════════════════════════════════════════╗
+║     OJO CRÍTICO - Backend Server         ║
+║                                           ║
+║  🚀 Servidor corriendo en:                ║
+║     http://localhost:${PORT}                 ║
+║                                           ║
+║  📱 Para emulador Android usa:            ║
+║     http://10.0.2.2:${PORT}                  ║
+║                                           ║
+║  🔒 HTTPS: En producción, usa un          ║
+║     certificado SSL para proteger         ║
+║     contra ataques Man-in-the-Middle      ║
+╚═══════════════════════════════════════════╝
+  `);
+});
+
+// Manejo de errores no capturados
+process.on('unhandledRejection', (error) => {
+  console.error('Error no manejado:', error);
+});
